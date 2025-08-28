@@ -12,9 +12,9 @@ const dialog_lines: Array[String] = [
 var dialogue_index: int = 0
 
 func _ready():
-	# No manual signal connection is needed here.
-	# The signal should be connected in the Godot editor.
-	if not dialogue_ui:
+	if dialogue_ui:
+		dialogue_ui.connect("next_pressed", Callable(self, "_on_dialogue_ui_next_pressed"))
+	else:
 		push_error("DialogueUI node not found")
 
 	if speaker_label and dialogue_label:
@@ -41,3 +41,8 @@ func _on_dialogue_ui_next_pressed():
 		process_line(parse_line(dialog_lines[dialogue_index]))
 	else:
 		print("Dialogue finished")
+		# Load the path to the next scene.
+		var next_scene_path = "res://level_2_tp.tscn"
+		
+		# Change the scene.
+		get_tree().change_scene_to_file("res://scenes/game.tscn")
