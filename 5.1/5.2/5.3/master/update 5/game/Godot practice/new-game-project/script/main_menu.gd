@@ -6,7 +6,7 @@ func _ready():
 	AudioManager.play("res://sfx/menu.ogg")
 
 func play():
-	ScreenTransition.go_to_scene("game")
+	ScreenTransition.go_to_scene("vn")
 
 
 func quit_game():
